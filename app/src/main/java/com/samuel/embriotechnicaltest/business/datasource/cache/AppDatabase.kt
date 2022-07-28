@@ -11,10 +11,13 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun getWeatherDao(): WeatherDao
 
     companion object {
+        // TODO: Create thread-safe singleton
+        @Volatile
         private var instance: AppDatabase? = null
 
+        @Synchronized
         fun getInstance(context: Context): AppDatabase {
-            instance?.let {
+            return if (instance == null) {
                 val localInstance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
@@ -23,8 +26,10 @@ abstract class AppDatabase : RoomDatabase() {
                     .fallbackToDestructiveMigration()
                     .build()
                 instance = localInstance
-                return localInstance
-            } ?: return instance!!
+                localInstance
+            } else {
+                instance!!
+            }
         }
 
     }

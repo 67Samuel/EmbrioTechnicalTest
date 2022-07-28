@@ -6,15 +6,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
-import com.samuel.embriotechnicaltest.business.datasource.cache.AppDatabase
-import com.samuel.embriotechnicaltest.business.datasource.cache.WeatherDao
 import com.samuel.embriotechnicaltest.business.datasource.network.OWMServiceImpl
 import com.samuel.embriotechnicaltest.business.domain.models.Weather
+import com.samuel.embriotechnicaltest.business.domain.util.StateMessageCallback
 import com.samuel.embriotechnicaltest.business.interactors.GetWeatherListFromNetwork
 import com.samuel.embriotechnicaltest.databinding.ActivityMainBinding
 import com.samuel.embriotechnicaltest.presentation.util.getWeatherIcon
 import com.samuel.embriotechnicaltest.presentation.util.getWeatherImage
+import com.samuel.embriotechnicaltest.presentation.util.processQueue
 
 class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction {
 
@@ -24,9 +23,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction
     private var recyclerAdapter: RecyclerViewWeatherAdapter? = null
 
     private val service: OWMServiceImpl = OWMServiceImpl()
-    private val db = AppDatabase.getInstance(this)
-    private val cache: WeatherDao = db.getWeatherDao()
-    private val getWeatherListFromNetwork: GetWeatherListFromNetwork = GetWeatherListFromNetwork(service, cache)
+    private val getWeatherListFromNetwork: GetWeatherListFromNetwork = GetWeatherListFromNetwork(service)
     private val viewModel: MainViewModel by viewModels { MainViewModel.Factory(getWeatherListFromNetwork) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +58,15 @@ class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction
                     backgroundLayout.background = AppCompatResources.getDrawable(this@MainActivity, getWeatherImage(firstWeather.main_desc))
                 }
             }
+
+            processQueue(
+                context = this@MainActivity,
+                queue = state.queue,
+                stateMessageCallback = object : StateMessageCallback {
+                    override fun removeMessageFromStack() {
+                        viewModel.onTriggerMainEvent(MainEvents.OnRemoveHeadFromQueue)
+                    }
+                })
         }
     }
 

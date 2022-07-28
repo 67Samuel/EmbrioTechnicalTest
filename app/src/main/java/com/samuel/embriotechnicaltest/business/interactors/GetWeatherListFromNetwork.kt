@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.first
 
 class GetWeatherListFromNetwork(
     private val service: OWMService,
-    private val cache: WeatherDao
 ) {
     private val TAG: String = "getWeatherListFromNetworkDebug"
 
@@ -54,14 +53,15 @@ class GetWeatherListFromNetwork(
 
     }.catch { e ->
         e.printStackTrace()
-        emit(
-            DataState.error(
-                response = Response(
-                    message = UNKNOWN_ERROR,
-                    uiComponentType = UIComponentType.Dialog(),
-                    messageType = MessageType.Error()
-                )
-            )
-        )
+        Log.e(TAG, "execute: error", e)
+//        emit(
+//            DataState.error(
+//                response = Response(
+//                    message = UNKNOWN_ERROR,
+//                    uiComponentType = UIComponentType.Dialog(),
+//                    messageType = MessageType.Error()
+//                )
+//            )
+//        )
     }
 }

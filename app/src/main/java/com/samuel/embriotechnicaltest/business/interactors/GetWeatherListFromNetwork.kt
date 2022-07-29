@@ -54,14 +54,14 @@ class GetWeatherListFromNetwork(
     }.catch { e ->
         e.printStackTrace()
         Log.e(TAG, "execute: error", e)
-//        emit(
-//            DataState.error(
-//                response = Response(
-//                    message = UNKNOWN_ERROR,
-//                    uiComponentType = UIComponentType.Dialog(),
-//                    messageType = MessageType.Error()
-//                )
-//            )
-//        )
+        emit(
+            DataState.error(
+                response = Response(
+                    message = UNKNOWN_ERROR,
+                    uiComponentType = UIComponentType.Dialog(),
+                    messageType = MessageType.Error()
+                )
+            )
+        )
     }
 }

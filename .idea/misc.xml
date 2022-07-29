@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/drawable/drizzle_icon.xml" value="0.127" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout-land/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout/activity_main2.xml" value="0.11510416666666666" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout/activity_main3.xml" value="0.259375" />
         <entry key="..\:/Users/user/AndroidStudioProjects/TechnicalTests/Embrio/app/src/main/res/layout/list_item_report.xml" value="0.22826086956521738" />
       </map>
     </option>

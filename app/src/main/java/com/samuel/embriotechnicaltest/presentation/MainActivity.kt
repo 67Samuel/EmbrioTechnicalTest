@@ -14,6 +14,7 @@ import com.samuel.embriotechnicaltest.databinding.ActivityMainBinding
 import com.samuel.embriotechnicaltest.presentation.util.getWeatherIcon
 import com.samuel.embriotechnicaltest.presentation.util.getWeatherImage
 import com.samuel.embriotechnicaltest.presentation.util.processQueue
+import java.util.*
 
 class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction {
 
@@ -50,7 +51,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction
                         0,
                         getWeatherIcon(firstWeather.main_desc),
                         0)
-                    desc.text = firstWeather.desc
+                    desc.text = firstWeather.desc.trim().replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                    temp.text = "Temp: ${firstWeather.temp}ºC"
                     feelsLike.text = "Feels Like: ${firstWeather.feelsLike}ºC"
                     minTemp.text = "Min Temp: ${firstWeather.minTemp}ºC"
                     maxTemp.text = "Max Temp: ${firstWeather.maxTemp}ºC"
@@ -82,7 +84,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewWeatherAdapter.Interaction
         binding.apply {
             day.text = item.day
             day.setCompoundDrawablesWithIntrinsicBounds(0, 0,  getWeatherIcon(item.main_desc),0)
-            desc.text = item.desc
+            desc.text = item.desc.trim().replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+            temp.text = "Temp: ${item.temp}ºC"
             feelsLike.text = "Feels Like: ${item.feelsLike}ºC"
             minTemp.text = "Min Temp: ${item.minTemp}ºC"
             maxTemp.text = "Max Temp: ${item.maxTemp}ºC"

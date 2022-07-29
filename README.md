@@ -4,10 +4,15 @@ The app has the required architecture for a Room database, but saving the data t
 It uses MVI architecture.
 
 ## How to build/run/test
-- Open project in Android Studio
-- Connect a device to it or run an emulator
-> Tested on OnePlus 5T
+- With Android Studio
+  - Open project in Android Studio
+  - Connect a device to it or run an emulator
+  > Tested on OnePlus 5T
+- With APK file
+  - Navigate to the [first release](https://github.com/67Samuel/EmbrioTechnicalTest/releases/tag/v0.0.0) in this repo
+  - Under Assets, download `EmbrioTechnicalTest.apk`
 
+## Comments
 ### Give some thought on how you can design a better user experience for Phone and Tablet users.
 - Obviously the UI can be improved - currently the app does not use different themes for light and dark/day and night mode, and does not handle the errors in a graceful and specific manner.
 - The app also shows only one weather forecast per day, and so a way to see a more granular report would increase user experience.
